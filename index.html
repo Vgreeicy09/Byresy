@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Bijoux ByResy</title>
+	<style>
+		.wp-block-cover-bg {
+			position: relative;
+			width: 100%;
+			min-height: 400px;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 70px; 
+		}
+		.wp-block-cover-bg img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 0;
+		}
+		.cover-content {
+			position: relative;
+			z-index: 1;
+			text-align: center;
+			color: #000;
+		}
+		.cover-content h2 {
+			color: #000;
+			font-size: 2.5em;
+			margin-bottom: 1em;
+		}
+		.cover-content p {
+			font-size: 1.2em;
+			margin-bottom: 1.5em;
+		}
+		.cover-content .main-btn {
+			background: #000;
+			color: #fff;
+			padding: 0.8em 2em;
+			border: none;
+			border-radius: 4px;
+			font-size: 1.1em;
+			cursor: pointer;
+			text-decoration: none;
+			transition: background 0.2s;
+		}
+		.cover-content .main-btn:hover {
+			background: #333;
+		}
+		.navbar {
+			width: 100%;
+			background: #fff;
+			border-bottom: 2px solid #000;
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 10;
+		}
+		.navbar-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.5em 2em;
+		}
+		.navbar-logo {
+			font-size: 1.5em;
+			font-weight: bold;
+			color: #000;
+			text-decoration: none;
+		}
+		.navbar-menu {
+			list-style: none;
+			display: flex;
+			gap: 2em;
+			margin: 0;
+			padding: 0;
+		}
+		.navbar-menu li a {
+			color: #000;
+			text-decoration: none;
+			font-size: 1.1em;
+			transition: color 0.2s;
+		}
+		.navbar-menu li a:hover {
+			color: #bfa14a;
+		}
+		body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #fff;
+}
+.main-header {
+  background: #fff;
+  color: #000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2em 2em 1em 2em;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #eee;
+}
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+.site-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #000;
+}
+.site-tagline {
+  font-size: 1.2em;
+  color: #333;
+  opacity: 0.8;
+  margin-top: 0.4em;
+}
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5em;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.header-nav a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.25em;
+  transition: color 0.2s, background 0.2s;
+  padding: 0.3em 0.8em;
+  border-radius: 2px;
+}
+.header-nav a:hover {
+  color: #fff;
+  background: #bfa14a;
+}
+.header-nav .icon {
+  font-size: 1.2em;
+  vertical-align: middle;
+}
+.breadcrumb-bar {
+  background: #fff;
+  color: #000;
+  padding: 0.7em 2em;
+  font-size: 0.95em;
+  border-bottom: 1px solid #eee;
+  margin-top: 70px; /* hauteur du header */
+}
+.breadcrumb-active {
+  color: #bfa14a;
+  font-weight: bold;
+}
+.hero-section {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  min-height: 100vh;
+  padding: 0;
+  background: url('Assets/anot.jpg') center 10%/cover no-repeat;
+  position: relative;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(20, 20, 20, 0.35);
+  z-index: 0;
+}
+.hero-image {
+  display: none;
+}
+.hero-content {
+  flex: 1 1 50%;
+  color: #fff;
+  max-width: 500px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0 4em 0 0;
+  text-align: right;
+  position: relative;
+}
+.hero-content h1 {
+  font-size: 2.8em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.hero-content p {
+  font-size: 1.2em;
+  margin-bottom: 1.5em;
+}
+.hero-btn {
+  background: #bfa14a;
+  color: #fff;
+  padding: 0.8em 2.5em;
+  border: none;
+  border-radius: 2px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.hero-btn:hover {
+  background: #a88d3c;
+}
+@media (max-width: 900px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 2em 1em;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-content {
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+  .hero-image {
+    justify-content: center;
+    margin-top: 2em;
+    height: auto;
+  }
+  .hero-image img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+  }
+  .hero-content {
+    padding: 0;
+    max-width: 100%;
+  }
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em 1em 0.5em 1em;
+  }
+  .header-left {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .header-nav ul {
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+    align-items: flex-start;
+    padding-left: 0;
+  }
+  .header-nav {
+    width: 100%;
+    margin-top: 1em;
+  }
+  .breadcrumb-bar {
+    padding: 0.7em 1em;
+    font-size: 0.95em;
+    margin-top: 110px;
+  }
+  .categories-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+  }
+  .category-card {
+    width: 90vw;
+    max-width: 350px;
+    padding: 1.5em 0.5em 2em 0.5em;
+  }
+  .category-card img {
+    width: 160px;
+    height: 160px;
+  }
+  .categories-title {
+    font-size: 1.5em;
+  }
+  .site-title {
+    font-size: 1.5em;
+  }
+  .site-tagline {
+    font-size: 1em;
+  }
+  .hero-content h1 {
+    font-size: 2em;
+  }
+  .hero-content p {
+    font-size: 1em;
+  }
+}
+@media (max-width: 600px) {
+  .main-header {
+    padding: 0.7em 0.5em 0.5em 0.5em;
+  }
+  .header-left {
+    gap: 6px;
+  }
+  .site-title {
+    font-size: 1.1em;
+  }
+  .site-tagline {
+    font-size: 0.9em;
+  }
+  .hero-content h1 {
+    font-size: 1.3em;
+  }
+  .hero-content p {
+    font-size: 0.95em;
+  }
+  .categories-title {
+    font-size: 1.1em;
+  }
+  .category-card {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 1em 0.2em 1.5em 0.2em;
+  }
+  .category-card img {
+    width: 110px;
+    height: 110px;
+  }
+}
+/* Menu burger pour mobile */
+@media (max-width: 900px) {
+  .header-nav ul {
+    display: none;
+    background: #fff;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    z-index: 2000;
+    flex-direction: column;
+    gap: 1.2em;
+    padding: 1.5em 0;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+    overflow: hidden;
+  }
+  .header-nav.active ul {
+    display: flex;
+    max-height: 500px;
+  }
+  .header-nav ul li a {
+    font-size: 1.3em;
+    padding: 0.7em 1.5em;
+    display: block;
+  }
+  .burger {
+    display: block;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 1em;
+    top: 1.2em;
+    z-index: 2100;
+  }
+  .burger span {
+    display: block;
+    height: 4px;
+    width: 28px;
+    background: #000;
+    margin: 6px auto;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+}
+@media (min-width: 901px) {
+  .burger {
+    display: none;
+  }
+}
+.byresy-highlight {
+  font-size: 1.5em;
+  color: #bfa14a;
+  font-weight: bold;
+}
+	</style>
+</head>
+<body>
+	<header class="main-header">
+    <div class="header-left">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <img src="Assets/byresylogo.png" alt="Logo Byresy" style="height:64px;display:inline-block;">
+        <div class="site-title" style="display:inline-block;">Byresy</div>
+      </div>
+      <div class="site-tagline">Ventes de bijoux et d'accessoires</div>
+    </div>
+    <div class="burger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="header-nav" id="headerNav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Patterns</a></li>
+        <li><a href="#"><span class="icon">&#128269;</span></a></li>
+        <li><a href="#"><span class="icon">&#128100;</span></a></li>
+        <li><a href="#"><span class="icon">&#128722;</span></a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="breadcrumb-bar">
+    <span class="breadcrumb-active">HOME</span> / <span>MY ACCOUNT</span>
+  </div>
+  <section class="hero-section">
+    <div class="hero-image">
+      <img src="Assets/Acceuil.jpg" alt="Image d'accueil Byresy">
+    </div>
+    <div class="hero-content">
+      <h1>BIENVENU(E) Chez<br><span class="byresy-highlight">ByResy</span></h1>
+      <p>Votre recherche de bijoux parfait se termine ici</p>
+      <a href="#" class="hero-btn">SHOP NOW</a>
+    </div>
+  </section>
+  <section class="product-categories">
+    <h2 class="categories-title">CATÉGORIES DE PRODUITS</h2>
+    <div class="categories-grid">
+      <div class="category-card">
+        <img src="Assets/gold-ring.jpg" alt="Bague Or">
+        <div class="category-label">Bague Or</div>
+      </div>
+      <div class="category-card">
+        <img src="Assets/diamond.jpg" alt="Diamant">
+        <div class="category-label">Diamant</div>
+        <a href="#" class="category-btn">ACHETER</a>
+      </div>
+      <div class="category-card">
+        <img src="Assets/earrings.jpg" alt="Boucles d'oreilles">
+        <div class="category-label">Boucles d'oreilles</div>
+      </div>
+    </div>
+  </section>
+  <style>
+    .product-categories {
+      background: #fff;
+      padding: 3em 0 4em 0;
+      text-align: center;
+    }
+    .categories-title {
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-bottom: 1.5em;
+      letter-spacing: 1px;
+    }
+    .categories-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .category-card {
+      background: #000;
+      border-radius: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2em 1em 2.5em 1em;
+      position: relative;
+    }
+    .category-card img {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      background: #000;
+      margin-bottom: 1.5em;
+    }
+    .category-label {
+      color: #fff;
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      position: relative;
+    }
+    .category-label::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #bfa14a;
+      margin: 0.5em auto 0 auto;
+      border-radius: 2px;
+    }
+    .category-btn {
+      margin-top: 1.2em;
+      background: #bfa14a;
+      color: #fff;
+      padding: 0.7em 2em;
+      border: none;
+      border-radius: 2px;
+      font-size: 1em;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s;
+      display: inline-block;
+    }
+    .category-btn:hover {
+      background: #a88d3c;
+    }
+    @media (max-width: 1100px) {
+      .categories-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 2em;
+      }
+    }
+  </style>
+  <script>
+function toggleMenu() {
+  var nav = document.getElementById('headerNav');
+  nav.classList.toggle('active');
+}
+// Ferme le menu burger quand on clique sur un lien
+document.addEventListener('DOMContentLoaded', function() {
+  var navLinks = document.querySelectorAll('.header-nav ul li a');
+  var nav = document.getElementById('headerNav');
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      if(window.innerWidth <= 900) {
+        nav.classList.remove('active');
+      }
+    });
+  });
+});
+</script>
+<footer class="site-footer">
+  <div class="footer-separator"></div>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="footer-brand">Byresy</div>
+      <div class="footer-copyright">Droits d'auteur © 2025 Tous droits réservés</div>
+      <div class="footer-links">
+        <a href="#">Conditions d'Utilisations</a>
+        <span class="footer-divider">|</span>
+        <a href="#">Politique de Confidentialité</a>
+        <span class="footer-divider">|</span>
+        <a href="#">Accessibilité</a>
+      </div>
+    </div>
+    <div class="footer-right">
+      <nav class="footer-nav">
+        <a href="#">ACCUEIL</a>
+        <a href="#">QUI SOMMES-NOUS</a>
+        <a href="#">CONTACT</a>
+        <a href="#">F.A.Q</a>
+        <a href="#">TÉMOIGNAGES</a>
+      </nav>
+      <form class="footer-newsletter">
+        <span class="footer-mail-icon">&#9993;</span>
+        <input type="email" placeholder="Adresse e-mail" required>
+        <button type="submit">S'ABONNER</button>
+      </form>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-circle"><i class="fa fa-facebook"></i></a>
+        <a href="#" class="footer-social-circle"><i class="fa fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="footer-whatsapp" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+</footer>
+<style>
+.site-footer {
+  background: #000;
+  color: #fff;
+  padding: 0 0 2em 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  position: relative;
+  margin-top: 0;
+}
+.footer-separator {
+  border-top: 1px solid #eee;
+  margin-bottom: 2em;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2em;
+  flex-wrap: wrap;
+}
+.footer-left {
+  flex: 1 1 350px;
+  min-width: 250px;
+}
+.footer-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #bfa14a;
+}
+.footer-copyright {
+  font-size: 1em;
+  margin-bottom: 1em;
+}
+.footer-links {
+  font-size: 1em;
+  color: #fff;
+}
+.footer-links a {
+  color: #bfa14a;
+  text-decoration: none;
+  margin: 0 0.2em;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: #a88d3c;
+  text-decoration: underline;
+}
+.footer-divider {
+  color: #bfa14a;
+  margin: 0 0.5em;
+}
+.footer-right {
+  flex: 2 1 500px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.2em;
+}
+.footer-nav {
+  display: flex;
+  gap: 1.2em;
+  margin-bottom: 0.5em;
+  flex-wrap: wrap;
+}
+.footer-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.footer-nav a:hover {
+  color: #bfa14a;
+}
+.footer-newsletter {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 0.5em;
+}
+.footer-mail-icon {
+  color: #bfa14a;
+  font-size: 1.3em;
+  background: #fff;
+  padding: 0 0.8em;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.footer-newsletter input[type="email"] {
+  border: none;
+  outline: none;
+  padding: 1em 1em;
+  font-size: 1em;
+  min-width: 180px;
+}
+.footer-newsletter button {
+  background: #bfa14a;
+  color: #fff;
+  border: none;
+  padding: 1em 2em;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 0 16px 16px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.footer-newsletter button:hover {
+  background: #a88d3c;
+}
+.footer-socials {
+  display: flex;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+.footer-social-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #bfa14a;
+  color: #fff;
+  font-size: 1.5em;
+  text-decoration: none;
+  font-family: 'FontAwesome', Arial, sans-serif;
+  transition: background 0.2s;
+}
+.footer-social-circle:hover {
+  background: #a88d3c;
+}
+.footer-whatsapp {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #bfa14a;
+  color: #fff;
+  font-size: 2.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 3000;
+  text-decoration: none;
+  font-family: 'FontAwesome', Arial, sans-serif;
+}
+.footer-whatsapp:hover {
+  background: #a88d3c;
+}
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2em;
+    padding: 0 1em;
+  }
+  .footer-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .footer-nav {
+    justify-content: flex-start;
+    gap: 0.7em;
+    flex-wrap: wrap;
+  }
+  .footer-newsletter {
+    width: 100%;
+    min-width: 0;
+  }
+}
+@media (max-width: 600px) {
+  .footer-container {
+    padding: 0 0.5em;
+  }
+  .footer-newsletter input[type="email"] {
+    min-width: 80px;
+    font-size: 0.95em;
+    padding: 0.7em 0.7em;
+  }
+  .footer-newsletter button {
+    padding: 0.7em 1em;
+    font-size: 0.95em;
+  }
+  .footer-social-circle {
+    width: 34px;
+    height: 34px;
+    font-size: 1.1em;
+  }
+  .footer-whatsapp {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3em;
+    right: 12px;
+    bottom: 12px;
+  }
+}
+</style>
+<!-- FontAwesome CDN pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</body>
+</html>
